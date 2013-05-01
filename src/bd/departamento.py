@@ -13,5 +13,6 @@ class Departamento(Base):
     descripcion= Column(String)
     
     
+      
     def alta(self):
         pass

@@ -6,6 +6,7 @@ Created on Apr 22, 2013
 
 from basededatos import *
 from sqlalchemy.orm import backref
+from sqlalchemy.schema import ForeignKey
 
 
 class Adjunto(Base):
@@ -19,6 +20,7 @@ class Adjunto(Base):
   #Comentar las opciones para los adjuntos (Documentadores)
   tipo_adjunto= Column(String)
   
+    
   def altas(self):
     #????
     pass
@@ -42,6 +44,6 @@ class RegistroAdjunto(Base):
   tabla_id= Column(String)
   
   #Documentar relacion con la clase 'Adjunto'
-  adjunto_id= relationship("Adjunto", backref=backref("registroadjunto"))
+  adjunto_id=Column(Integer, ForeignKey ("adjunto.adjunto_id"))
+  adjunto= relationship("Adjunto", backref=backref("registro_adjunto"))
   
-

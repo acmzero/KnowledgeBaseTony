@@ -12,5 +12,7 @@ class Clasificacion(Base):
     nombre = Column(String)
     
     
+    
+    
     def alta(self):
         pass
