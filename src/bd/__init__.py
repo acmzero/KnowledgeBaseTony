@@ -1,2 +1,0 @@
-import basededatos
-import adjunto
