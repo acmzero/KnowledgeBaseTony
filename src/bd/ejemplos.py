@@ -17,5 +17,5 @@ tipo_problema.suceso=[suceso,suceso2]
 
 session.add(tipo_problema)
 session.commit()
-session.commit()
+
 
