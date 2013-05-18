@@ -1,0 +1,8 @@
+ 
+<form method="post" action="">
+  {{ formset.management_form }}
+    {% for form in formset %}
+        {{ form }}
+    {% endfor %}
+    <input type="submit" value="Nuevo Suceso"</input>
+</form>

@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.forms import ModelForm
 # Create your models here.
 class Clasificacion(models.Model):
   nombre = models.CharField(max_length=50)
@@ -55,5 +55,8 @@ class Solucion(models.Model):
     def __unicode__(self):
       self.nombre
 
-
+class SucesoForm(ModelForm):
+	class Meta:
+		model= Suceso
+		#fields=['nombre','descripcion']
      
