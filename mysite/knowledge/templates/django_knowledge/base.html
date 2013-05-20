@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es-mx">
+<head>
+
+  <meta charset="utf-8">
+  
+  <title>{% block title %}{% endblock title %} | Base de Conocimientos</title>
+  
+  <link rel="stylesheet" href="{{ STATIC_URL }}knowledge/css/reset.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}knowledge/css/main.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+  
+  {% block knowledge_inner %}
+  {% endblock knowledge_inner %}
+
+</div>
+  
+</body>
+</html>

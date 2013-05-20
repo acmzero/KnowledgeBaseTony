@@ -1,5 +1,6 @@
 # Django settings for mysite project.
-
+import os
+DIRNAME = os.path.dirname(__file__)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -34,6 +35,10 @@ TIME_ZONE = 'America/Chicago'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'es-mx'
+LANGUAGES=(("es-mx",u"Espanol Mexico"))
+LOCALE_PATHS = [
+    DIRNAME + '/locale',
+]
 
 SITE_ID = 1
 
@@ -122,7 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    
+    'django.contrib.markup',
     'knowledge',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
