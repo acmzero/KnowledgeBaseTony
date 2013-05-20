@@ -1,8 +1,11 @@
  
-<form method="post" action="">
-  {{ formset.management_form }}
-    {% for form in formset %}
-        {{ form }}
-    {% endfor %}
-    <input type="submit" value="Nuevo Suceso"</input>
+<form method="POST" action=".">
+	{% csrf_token %}
+    {{ form.as_p }}
+    {{ form2.as_p }}
+    <input type="submit" value="Grabar"</input>
+    <input type="reset" value="Limpiar"</input>
+    
 </form>
+<br>
+{{ informacion }}

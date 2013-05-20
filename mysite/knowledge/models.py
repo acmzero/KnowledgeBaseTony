@@ -1,6 +1,9 @@
 from django.db import models
 from django.forms import ModelForm
-# Create your models here.
+from django.template.defaultfilters import default
+from django.utils.datetime_safe import datetime
+from django.db.models.base import Model
+
 class Clasificacion(models.Model):
   nombre = models.CharField(max_length=50)
     
@@ -25,21 +28,20 @@ class Adjunto(models.Model):
   def __unicode__(self):
     return self.nombre
 class RegistroAdjunto(models.Model):
-  
   registro_id= models.IntegerField(max_length=50)
-  
   #Documentar Identificador de cada columna
   tabla=models.CharField(max_length=50)
   adjuntos=models.ForeignKey(Adjunto)
-    
+  def __unicode__(self):
+    return 'es un archivo de'+self.tabla+ 'del registro'+str(self.registro_id) 
 
 class Suceso(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
-    fecha=models.CharField(max_length=50)
-    urgencia=models.IntegerField(max_length=50)
-    impacto=models.IntegerField(max_length=50)
-    contador=models.IntegerField(max_length=50)
+    fecha=models.DateField("Fecha: dd/mm/aaaa",default=datetime.now())
+    urgencia=models.IntegerField(max_length=50,choices=((1,1),(2,2),(3,3)))
+    impacto=models.IntegerField(max_length=50,choices=((1,1),(2,2),(3,3)))
+    contador=models.IntegerField(max_length=50,default=0)
     nivel=models.CharField(max_length=50)     
     clasificacion=models.ForeignKey(Clasificacion)
     tipo_problema=models.ForeignKey(TipoProblema)
@@ -56,7 +58,10 @@ class Solucion(models.Model):
       self.nombre
 
 class SucesoForm(ModelForm):
-	class Meta:
-		model= Suceso
-		#fields=['nombre','descripcion']
-     
+  class Meta:
+    model= Suceso
+    exclude=['fecha','nivel']
+    #fields=['nombre','descripcion']
+class AdjuntoForm(ModelForm):
+  class Meta:
+    model=Adjunto
