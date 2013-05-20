@@ -15,8 +15,6 @@ def nuevo_suceso(request):
 		info="inicializando"
 		
 		if form.is_valid():
-			salva=Suceso(request.POST)
-			salva.save()
 			nombre=form.cleaned_data['nombre']
 			descripcion=form.cleaned_data['descripcion']
 			fecha=datetime.now()
