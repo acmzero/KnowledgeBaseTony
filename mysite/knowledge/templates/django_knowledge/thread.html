@@ -18,7 +18,7 @@
       <h5>{{ question.get_name }} <span class="quiet">
         {% if question.user %}
           {% if question.user.is_staff %}&nbsp;<span class="dk-label dk-label-success">{% trans "staff" %}</span>
-          {% else %}&nbsp;<span class="dk-label">{% trans "user" %}</span>{% endif %}
+          {% else %}&nbsp;<span class="dk-label">{% trans "usuario" %}</span>{% endif %}
         {% endif %}
         &nbsp;{{ question.added }}
       </span></h5>
@@ -39,11 +39,11 @@
       <div class="the-author gravatar smaller"><img src="{% get_gravatar response.get_email 40 %}" alt="{{ response.get_name }} gravatar"></div>
       <div class="the-content gravatar">
         <h5>{{ response.get_name }} <span class="quiet">
-          {% if response.accepted %}&nbsp;<span class="dk-label dk-label-warning">{% trans "accepted answer" %}</span>{% endif %}
-          {% if question.user == response.user %}&nbsp;<span class="dk-label dk-label-info">{% trans "poster" %}</span>{% endif %}
+          {% if response.accepted %}&nbsp;<span class="dk-label dk-label-warning">{% trans "respuesta aceptada" %}</span>{% endif %}
+          {% if question.user == response.user %}&nbsp;<span class="dk-label dk-label-info">{% trans "posteado" %}</span>{% endif %}
           {% if response.user %}
             {% if response.user.is_staff %}&nbsp;<span class="dk-label dk-label-success">{% trans "staff" %}</span>
-            {% else %}&nbsp;<span class="dk-label">{% trans "user" %}</span>{% endif %}
+            {% else %}&nbsp;<span class="dk-label">{% trans "usuario" %}</span>{% endif %}
           {% endif %}
           &nbsp;{{ response.added }}
         </span></h5>
@@ -54,7 +54,7 @@
       </div>
     </div> <!-- .dk-dialog -->
   {% empty %}
-    <p class="center"><em>{% trans "No responses yet." %}</em></p>
+    <p class="center"><em>{% trans "No hay respuestas todavia." %}</em></p>
   {% endfor %}
 
 
@@ -67,9 +67,9 @@
     {% include "django_knowledge/form.html" with submit_value="Respond to this question" submit_and="and check back often for updates." %}
   {% else %}
     {% if question.locked %}
-      <p class="center"><em>{% trans "This question has been closed." %}</em></p>
+      <p class="center"><em>{% trans "Esta pregunta ha sido cerrada." %}</em></p>
     {% else %}
-      <p class="center"><em>{% trans "Please log in to respond." %}</em></p>
+      <p class="center"><em>{% trans "Por favor inicie sesion para responder." %}</em></p>
     {% endif %}
   {% endif %}
 

@@ -21,7 +21,7 @@ STATUSES = (
 
 
 STATUSES_EXTENDED = STATUSES + (
-    ('inherit', _('Inherit')),
+    ('inherit', _('Heredar')),
 )
 
 
@@ -37,8 +37,8 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['title']
-        verbose_name = _('Category')
-        verbose_name_plural = _('Categories')
+        verbose_name = _('Categoria')
+        verbose_name_plural = _('Categorias')
 
 
 class KnowledgeBase(models.Model):
@@ -53,9 +53,9 @@ class KnowledgeBase(models.Model):
     user = models.ForeignKey('auth.User' if django.VERSION < (1, 5, 0) else django_settings.AUTH_USER_MODEL, blank=True,
                              null=True, db_index=True)
     alert = models.BooleanField(default=settings.ALERTS,
-        verbose_name=_('Alert'),
-        help_text=_('Check this if you want to be alerted when a new'
-                        ' response is added.'))
+        verbose_name=_('Alerta'),
+        help_text=_('Seleccione esta opcion si desea recibir una alerta cuando se agregue'
+                        ' una nueva respuesta.'))
 
     # for anonymous posting, if permitted
     name = models.CharField(max_length=64, blank=True, null=True,
@@ -92,7 +92,7 @@ class KnowledgeBase(models.Model):
             u'{0} {1}'.format(self.user.first_name, self.user.last_name).strip()\
             or self.user.username
         )))
-        return name.strip() or _("Anonymous")
+        return name.strip() or _("Anonimo")
 
     get_email = lambda s: s.email or (s.user and s.user.email)
     get_pair = lambda s: (s.get_name(), s.get_email())
@@ -264,10 +264,10 @@ class Response(KnowledgeBase):
         related_name='responses')
 
     body = models.TextField(blank=True, null=True,
-        verbose_name=_('Response'),
-        help_text=_('Please enter your response. Markdown enabled.'))
+        verbose_name=_('Respuesta'),
+        help_text=_('Introduzca su respuesta. Markdown Activado.'))
     status = models.CharField(
-        verbose_name=_('Status'),
+        verbose_name=_('Estado'),
         max_length=32, choices=STATUSES_EXTENDED,
         default='inherit', db_index=True)
     accepted = models.BooleanField(default=False)
@@ -276,8 +276,8 @@ class Response(KnowledgeBase):
 
     class Meta:
         ordering = ['added']
-        verbose_name = _('Response')
-        verbose_name_plural = _('Responses')
+        verbose_name = _('Respuesta')
+        verbose_name_plural = _('Respuestas')
 
     def __unicode__(self):
         return self.body[0:100] + u'...'

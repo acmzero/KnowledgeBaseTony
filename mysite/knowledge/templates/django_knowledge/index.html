@@ -3,12 +3,12 @@
 {% load i18n %}
 {% load url from future %}
 
-{% block title %}{% trans "Support" %}{% endblock title %}
+{% block title %}{% trans "Soporte" %}{% endblock title %}
 
 {% block knowledge_widgets %}
 
 <div class="dk-widget">
-  <h3>{% blocktrans with count=questions|length %}Top {{ count }} Questions{% endblocktrans %}</h3>
+  <h3>{% blocktrans with count=questions|length %}Preguntas {{ count }} Frecuentes{% endblocktrans %}</h3>
   <hr />
 
   {% include 'django_knowledge/question_list.html' %}
