@@ -19,6 +19,13 @@ STATUSES = (
 
 )
 
+NIVELES=(
+         ("1","Critico"),
+         ("2","Alto"),
+         ("3","Media"),
+         ("4","Baja"),
+         ("5","Planificada"),
+         )
 
 STATUSES_EXTENDED = STATUSES + (
     ('inherit', _('Heredar')),
@@ -37,8 +44,8 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['title']
-        verbose_name = _('Categoria')
-        verbose_name_plural = _('Categorias')
+        verbose_name = _('Categoría')
+        verbose_name_plural = _('Categorías')
 
 
 class KnowledgeBase(models.Model):
@@ -54,7 +61,7 @@ class KnowledgeBase(models.Model):
                              null=True, db_index=True)
     alert = models.BooleanField(default=settings.ALERTS,
         verbose_name=_('Alerta'),
-        help_text=_('Seleccione esta opcion si desea recibir una alerta cuando se agregue'
+        help_text=_('Seleccione esta opción si desea recibir una alerta cuando se agregue '
                         ' una nueva respuesta.'))
 
     # for anonymous posting, if permitted
@@ -92,7 +99,7 @@ class KnowledgeBase(models.Model):
             u'{0} {1}'.format(self.user.first_name, self.user.last_name).strip()\
             or self.user.username
         )))
-        return name.strip() or _("Anonimo")
+        return name.strip() or _("Anónimo")
 
     get_email = lambda s: s.email or (s.user and s.user.email)
     get_pair = lambda s: (s.get_name(), s.get_email())
@@ -167,6 +174,10 @@ class Question(KnowledgeBase):
     impacto=models.CharField(verbose_name=("Impacto"),max_length=32,choices=URGENCIAS)
     
     urgencia=models.CharField(verbose_name="Urgencia",choices=URGENCIAS,max_length=32)
+    
+    contador = models.IntegerField(verbose_name="Contador",default=0)
+    
+    nivel = models.CharField(verbose_name="Nivel",choices=NIVELES,max_length=32)
 
     locked = models.BooleanField(default=False)
 

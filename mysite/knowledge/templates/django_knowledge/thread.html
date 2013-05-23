@@ -15,10 +15,11 @@
     <div class="the-author gravatar"><img src="{% get_gravatar question.get_email %}" alt="{{ question.get_name }} gravatar"></div>
     <div class="the-content gravatar">
       <h2>{{ question.title }} Impacto: {{ question.impacto}}</h2>
+      <h3>Contador: {{ question.contador}}</h3>
       <h5>{{ question.get_name }} <span class="quiet">
         {% if question.user %}
           {% if question.user.is_staff %}&nbsp;<span class="dk-label dk-label-success">{% trans "staff" %}</span>
-          {% else %}&nbsp;<span class="dk-label">{% trans "usuario" %}</span>{% endif %}
+          {% else %}&nbsp;<span class="dk-label">{% trans "Usuario" %}</span>{% endif %}
         {% endif %}
         &nbsp;{{ question.added }}
       </span></h5>
@@ -54,7 +55,7 @@
       </div>
     </div> <!-- .dk-dialog -->
   {% empty %}
-    <p class="center"><em>{% trans "No hay respuestas todavia." %}</em></p>
+    <p class="center"><em>{% trans "No hay respuestas todavía." %}</em></p>
   {% endfor %}
 
 
@@ -69,7 +70,7 @@
     {% if question.locked %}
       <p class="center"><em>{% trans "Esta pregunta ha sido cerrada." %}</em></p>
     {% else %}
-      <p class="center"><em>{% trans "Por favor inicie sesión para responder." %}</em></p>
+      <p class="center"><em>{% trans "Por favor inicie Sesión para responder." %}</em></p>
     {% endif %}
   {% endif %}
 
