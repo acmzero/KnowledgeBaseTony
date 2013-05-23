@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-15 -*-
+# -*- coding: UTF-8 -*-
 from knowledge import settings
 
 import django
