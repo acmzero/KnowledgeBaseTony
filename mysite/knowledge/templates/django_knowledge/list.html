@@ -18,7 +18,7 @@
 
 
   {% if not questions.paginator.count %}
-    <p class="center"><em>{% trans "No results found." %}</em></p>
+    <p class="center"><em>{% trans "No hay resultados." %}</em></p>
   {% endif %}
   
   <hr class="light"/>
@@ -26,13 +26,13 @@
   <div class="center">
     <strong>
     {% if questions.has_previous %}
-      <a href="?{% page_query request questions.previous_page_number %}">&larr; {% trans "previous" %}</a>
+      <a href="?{% page_query request questions.previous_page_number %}">&larr; {% trans "anterior" %}</a>
     {% endif %}
 
-    &nbsp; {% blocktrans with number=questions.number pages=questions.paginator.num_pages %}page {{ number }} of {{ page }}{% endblocktrans %} &nbsp;
+    &nbsp; {% blocktrans with number=questions.number pages=questions.paginator.num_pages %}Pagina {{ number }} de {{ page }}{% endblocktrans %} &nbsp;
 
     {% if questions.has_next %}
-      <a href="?{% page_query request questions.next_page_number %}">{% trans "next" %} &rarr;</a>
+      <a href="?{% page_query request questions.next_page_number %}">{% trans "siguiente" %} &rarr;</a>
     {% endif %}
     </strong>
   </div>

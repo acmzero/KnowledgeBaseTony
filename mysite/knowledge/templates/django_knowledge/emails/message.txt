@@ -1,27 +1,27 @@
 {% load i18n %}
 {% load markup %}
 
-{% blocktrans with name=name %}Hello {{ name }},{% endblocktrans %}
+{% blocktrans with name=name %}Hola {{ name }},{% endblocktrans %}
 
 {% if response %}
     {% blocktrans with url=response.question.url title=response.question.title domain=site.domain %}
-    We just wanted to let you know that a new response has been added to the question "{{ title }}". You can visit it here: {{ domain }}{{ url "}}"
+    Solo queriamos hacerle saber que una nueva respuesta ha sido agregada a la pregunta "{{ title }}". Usted puede visitarla aqui: {{ domain }}{{ url "}}"
     {% endblocktrans %}
 
     {{ response.body }}
 
-    {% trans "You are receiving these messages because you checked the 'alert' box when you originally posted." %}
+    {% trans "Usted esta recibiendo estos mensajes, ya que marco inicialmente la casilla "alerta"." %}
 {% endif %}
 
 {% if question %}
     {% blocktrans with url=question.url title=question.title domain=site.domain %}
-    We just wanted to let you know that a new question has been added: "{{ title }}". You can visit it here: {{ domain }}{{ url "}}"
+    Solo queriamos hacerle saber que se ha agregado una nueva pregunta: "{{ title }}". Usted puede visitarla aqui: {{ domain }}{{ url "}}"
     {% endblocktrans %}
 
     {{ question.body }}
 
-    {% trans "You are receiving these messages because you are a staff member." %}
+    {% trans "Usted esta recibiendo estos mensajes porque es un miembro del staff." %}
 {% endif %}
 
-{% blocktrans with name=site.name %}Thank you,
-{{ name }} team{% endblocktrans %}
+{% blocktrans with name=site.name %}Gracias,
+{{ name }} equipo{% endblocktrans %}

@@ -4,32 +4,32 @@
 {% load markup %}
 
 {% block content %}
-    <p>{% blocktrans with name=name %}Hello {{ name }},{% endblocktrans %}</p>
+    <p>{% blocktrans with name=name %}Hola {{ name }},{% endblocktrans %}</p>
 
     {% if response %}
         <p>{% blocktrans with url=response.question.url title=response.question.title domain=site.domain %}
-        We just wanted to let you know that a new response has been added to the question "{{ title }}". You can visit it here: <a href="{{ domain }}{{ url "}}"">{{ domain }}{{ url "}}</a">.
+        Solo queriamos decirle que una nueva respuesta ha sido agregada a la pregunta "{{ title }}". Usted puede visitarla aqui: <a href="{{ domain }}{{ url "}}"">{{ domain }}{{ url "}}</a">.
         {% endblocktrans %}</p>
 
         <div style="background:#f3f3f3;margin:8px 0;padding:12px 18px">
             {{ response.body|striptags|markdown }}
         </div>
 
-        <p>{% trans "You are receiving these messages because you checked the 'alert' box when you originally posted." %}</p>
+        <p>{% trans "Usted esta recibiendo estos mensajes ya que marco inicialmente la casilla "alerta"." %}</p>
     {% endif %}
 
     {% if question %}
         <p>{% blocktrans with url=question.url title=question.title domain=site.domain %}
-        We just wanted to let you know that a new question has been added: "{{ title }}". You can visit it here: <a href="{{ domain }}{{ url "}}"">{{ domain }}{{ url "}}</a">
+        Solo queriamos hacerle saber que una nueva pregunta se ha agregado: "{{ title }}". Usted puede visitarla aqui: <a href="{{ domain }}{{ url "}}"">{{ domain }}{{ url "}}</a">
         {% endblocktrans %}</p>
 
         <div style="background:#f3f3f3;margin:8px 0;padding:12px 18px">
             {{ question.body|striptags|markdown }}
         </div>
 
-        <p>{% trans "You are receiving these messages because you are a staff member." %}</p>
+        <p>{% trans "Usted esta recibiendo estos mensajes porque es un miembro del staff." %}</p>
     {% endif %}
 
-    <p>{% blocktrans with name=site.name %}Thank you,
-    {{ name }} team{% endblocktrans %}</p>
+    <p>{% blocktrans with name=site.name %}Gracias,
+    {{ name }} equipo{% endblocktrans %}</p>
 {% endblock content %}
