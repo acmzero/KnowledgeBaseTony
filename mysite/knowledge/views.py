@@ -126,7 +126,9 @@ def knowledge_thread(request,
             return redirect(question.get_absolute_url())
     else:
         form = Form(request.user, question)
-
+    
+    question.contador+=1
+    question.save()
     return render(request, template, {
         'request': request,
         'question': question,

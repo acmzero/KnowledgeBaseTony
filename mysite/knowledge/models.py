@@ -19,6 +19,13 @@ STATUSES = (
 
 )
 
+NIVELES=(
+         ("1","Critico"),
+         ("2","Alto"),
+         ("3","Media"),
+         ("4","Baja"),
+         ("5","Planificada"),
+         )
 
 STATUSES_EXTENDED = STATUSES + (
     ('inherit', _('Inherit')),
@@ -167,6 +174,10 @@ class Question(KnowledgeBase):
     impacto=models.CharField(verbose_name=("Impacto"),max_length=32,choices=URGENCIAS)
     
     urgencia=models.CharField(verbose_name="Urgencia",choices=URGENCIAS,max_length=32)
+    
+    contador = models.IntegerField(verbose_name="Contador",default=0)
+    
+    nivel = models.CharField(verbose_name="Nivel",choices=NIVELES,max_length=32)
 
     locked = models.BooleanField(default=False)
 

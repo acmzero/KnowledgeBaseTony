@@ -15,6 +15,7 @@
     <div class="the-author gravatar"><img src="{% get_gravatar question.get_email %}" alt="{{ question.get_name }} gravatar"></div>
     <div class="the-content gravatar">
       <h2>{{ question.title }} Impacto: {{ question.impacto}}</h2>
+      <h3>Contador: {{ question.contador}}</h3>
       <h5>{{ question.get_name }} <span class="quiet">
         {% if question.user %}
           {% if question.user.is_staff %}&nbsp;<span class="dk-label dk-label-success">{% trans "staff" %}</span>
