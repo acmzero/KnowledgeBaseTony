@@ -24,7 +24,7 @@
       <h5>{{ question.get_name }} <span class="quiet">
         {% if question.user %}
           {% if question.user.is_staff %}&nbsp;<span class="dk-label dk-label-success">{% trans "staff" %}</span>
-          {% else %}&nbsp;<span class="dk-label">{% trans "usuario" %}</span>{% endif %}
+          {% else %}&nbsp;<span class="dk-label">{% trans "Usuario" %}</span>{% endif %}
         {% endif %}
         &nbsp;{{ question.added }}
       </span></h5>
@@ -87,7 +87,7 @@
       </div>
     </div> <!-- .dk-dialog -->
   {% empty %}
-    <p class="center"><em>{% trans "No hay respuestas todavia." %}</em></p>
+    <p class="center"><em>{% trans "No hay respuestas todavía." %}</em></p>
   {% endfor %}
 
 
@@ -102,7 +102,7 @@
     {% if question.locked %}
       <p class="center"><em>{% trans "Esta pregunta ha sido cerrada." %}</em></p>
     {% else %}
-      <p class="center"><em>{% trans "Por favor inicie sesion para responder." %}</em></p>
+      <p class="center"><em>{% trans "Por favor inicie Sesión para responder." %}</em></p>
     {% endif %}
   {% endif %}
 

@@ -8,26 +8,26 @@
 
     {% if response %}
         <p>{% blocktrans with url=response.question.url title=response.question.title domain=site.domain %}
-        Solo queriamos decirle que una nueva respuesta ha sido agregada a la pregunta "{{ title }}". Usted puede visitarla aqui: <a href="{{ domain }}{{ url "}}"">{{ domain }}{{ url "}}</a">.
+        Sólo queriamos decirle que una nueva respuesta ha sido agregada a la pregunta "{{ title }}". Usted puede visitarla aqui: <a href="{{ domain }}{{ url "}}"">{{ domain }}{{ url "}}</a">.
         {% endblocktrans %}</p>
 
         <div style="background:#f3f3f3;margin:8px 0;padding:12px 18px">
             {{ response.body|striptags|markdown }}
         </div>
 
-        <p>{% trans "Usted esta recibiendo estos mensajes ya que marco inicialmente la casilla "alerta"." %}</p>
+        <p>{% trans "Usted está recibiendo estos mensajes ya que marco inicialmente la casilla "alerta"." %}</p>
     {% endif %}
 
     {% if question %}
         <p>{% blocktrans with url=question.url title=question.title domain=site.domain %}
-        Solo queriamos hacerle saber que una nueva pregunta se ha agregado: "{{ title }}". Usted puede visitarla aqui: <a href="{{ domain }}{{ url "}}"">{{ domain }}{{ url "}}</a">
+        Sólo queriamos hacerle saber que una nueva pregunta se ha agregado: "{{ title }}". Usted puede visitarla aqui: <a href="{{ domain }}{{ url "}}"">{{ domain }}{{ url "}}</a">
         {% endblocktrans %}</p>
 
         <div style="background:#f3f3f3;margin:8px 0;padding:12px 18px">
             {{ question.body|striptags|markdown }}
         </div>
 
-        <p>{% trans "Usted esta recibiendo estos mensajes porque es un miembro del staff." %}</p>
+        <p>{% trans "Usted está recibiendo estos mensajes porque es un miembro del staff." %}</p>
     {% endif %}
 
     <p>{% blocktrans with name=site.name %}Gracias,
