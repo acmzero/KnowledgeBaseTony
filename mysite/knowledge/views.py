@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.db.models import Q
 
+import knowledge.models as modss
 from knowledge.models import Question, Response, Category
 from knowledge.forms import QuestionForm, ResponseForm
 from knowledge.utils import paginate
@@ -129,6 +130,10 @@ def knowledge_thread(request,
     
     question.contador+=1
     question.save()
+    if question.impacto!="" and question.urgencia!="":
+      question.nivel=str(int(question.impacto)+int(question.urgencia)-1 or 0)
+    if question.contador>5:
+      question.categories=Category.objects.get(title="Problema")
     return render(request, template, {
         'request': request,
         'question': question,

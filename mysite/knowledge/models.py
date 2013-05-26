@@ -9,35 +9,50 @@ from django.conf import settings as django_settings
 from knowledge.managers import QuestionManager, ResponseManager
 from knowledge.signals import knowledge_post_save
 
-URGENCIAS=(
-           ("1","Alta"),
-           ("2","Media"),
-           ("3","Baja"),
+URGENCIAS = (
+           ("1", "Alta"),
+           ("2", "Media"),
+           ("3", "Baja"),
            )
 STATUSES = (
     ('public', _('Publico')),
 
 )
 
-NIVELES=(
-         ("1","Critico"),
-         ("2","Alto"),
-         ("3","Media"),
-         ("4","Baja"),
-         ("5","Planificada"),
+NIVELES = (
+         ("1", "Critico"),
+         ("2", "Alto"),
+         ("3", "Media"),
+         ("4", "Baja"),
+         ("5", "Planificada"),
          )
-
+TIEMPO_RESOLUCION = (
+                   ("1", "1 Hora"),
+                   ("2", "8 Horas"),
+                   ("3", "24 Horas"),
+                   ("4", "48 Horas"),
+                   ("5", "Planificada")
+                   )
 STATUSES_EXTENDED = STATUSES + (
     ('inherit', _('Heredar')),
 )
 
-
+class TipoProblema(models.Model):
+  tipo = models.CharField(max_length=60)
+  
+  def __unicode__(self):
+    return self.tipo
+  class Meta:
+    verbose_name="Tipo de Problema"
+  
 class Category(models.Model):
     added = models.DateTimeField(auto_now_add=True)
     lastchanged = models.DateTimeField(auto_now=True)
 
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
+    
+    
 
     def __unicode__(self):
         return self.title
@@ -171,17 +186,21 @@ class Question(KnowledgeBase):
         max_length=32, choices=STATUSES,
         default='public', db_index=True)
     
-    impacto=models.CharField(verbose_name=("Impacto"),max_length=32,choices=URGENCIAS)
+    impacto = models.CharField(verbose_name=("Impacto"), max_length=32, choices=URGENCIAS)
     
-    urgencia=models.CharField(verbose_name="Urgencia",choices=URGENCIAS,max_length=32)
+    urgencia = models.CharField(verbose_name="Urgencia", choices=URGENCIAS, max_length=32)
     
-    contador = models.IntegerField(verbose_name="Contador",default=0)
+    contador = models.IntegerField(verbose_name="Contador", default=0)
     
-    nivel = models.CharField(verbose_name="Nivel",choices=NIVELES,max_length=32)
+    nivel = models.CharField(verbose_name="Nivel", choices=NIVELES, max_length=32)
+    
+    tipo_problema= models.ForeignKey("knowledge.TipoProblema")
 
     locked = models.BooleanField(default=False)
 
-    categories = models.ManyToManyField('knowledge.Category', blank=True)
+    categories = models.ForeignKey('knowledge.Category', blank=False,verbose_name="Clasificacion")
+    
+    adjuntos=models.ManyToManyField("knowledge.Adjunto",verbose_name="Adjuntos")
 
     objects = QuestionManager()
 
@@ -192,6 +211,18 @@ class Question(KnowledgeBase):
 
     def __unicode__(self):
         return self.title
+
+    def get_nivel(self):
+      for a in NIVELES:
+        if a[0] == self.nivel:
+          return a[1]
+      return ""
+    def get_tiempo_resolucion(self):
+      for a in TIEMPO_RESOLUCION:
+        if a[0] == self.nivel:
+          return a[1]
+      return ""
+    
 
     @models.permalink
     def get_absolute_url(self):
@@ -303,6 +334,13 @@ class Response(KnowledgeBase):
         self.question.accept(self)
     accept.alters_data = True
 
+
+class Adjunto(models.Model):
+  nombre = models.CharField(max_length=50)
+  localizacion=models.FileField(upload_to='./archivos', blank = False)
+  #Comentar las opciones para los adjuntos (Documentadores)
+  tipo_adjunto= models.CharField(max_length=50)
+  
 
 # cannot attach on abstract = True... derp
 models.signals.post_save.connect(knowledge_post_save, sender=Question)

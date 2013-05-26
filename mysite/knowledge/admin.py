@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from knowledge.models import Question, Response, Category
+from knowledge.models import Question, Response, Category,TipoProblema
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -21,3 +21,8 @@ class ResponseAdmin(admin.ModelAdmin):
     list_select_related = True
     raw_id_fields = ['user', 'question']
 admin.site.register(Response, ResponseAdmin)
+
+class TipoProblemaAdmin(admin.ModelAdmin):
+    list_display = [f.name for f in TipoProblema._meta.fields]
+    list_select_related = True
+admin.site.register(TipoProblema, TipoProblemaAdmin)

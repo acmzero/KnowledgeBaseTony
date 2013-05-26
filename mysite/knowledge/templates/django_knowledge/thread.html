@@ -14,8 +14,12 @@
   <div class="dk-dialog">
     <div class="the-author gravatar"><img src="{% get_gravatar question.get_email %}" alt="{{ question.get_name }} gravatar"></div>
     <div class="the-content gravatar">
-      <h2>{{ question.title }} Impacto: {{ question.impacto}}</h2>
+      <h2>{{ question.title }}</h2>
       <h3>Contador: {{ question.contador}}</h3>
+      <h3>Nivel: {{ question.get_nivel }}</h3>
+      <h3>Tipo: {{ question.tipo_problema }}</h3>
+      <h3>Clasificacion: {{ question.categories }}</h3>
+      <h3>Tiempo estimado de Resoluci&oacute;n: {{ question.get_tiempo_resolucion }}</h3>
       <h5>{{ question.get_name }} <span class="quiet">
         {% if question.user %}
           {% if question.user.is_staff %}&nbsp;<span class="dk-label dk-label-success">{% trans "staff" %}</span>

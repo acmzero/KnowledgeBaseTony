@@ -24,10 +24,11 @@ def QuestionForm(user, *args, **kwargs):
         if not settings.ALLOW_ANONYMOUS:
             return None
         else:
-            selected_fields = ['name', 'email', 'title', 'body','impacto',"urgencia","contador","nivel"]
+            selected_fields = ['name', 'email', 'title', 'body']
     else:
         selected_fields = ['user', 'title', 'body', 'status',"impacto"]
-
+    
+    selected_fields+=['impacto',"urgencia","categories","tipo_problema","adjuntos"]
     if settings.ALERTS:
         selected_fields += ['alert']
 
