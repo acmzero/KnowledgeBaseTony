@@ -26,7 +26,7 @@ def QuestionForm(user, *args, **kwargs):
         else:
             selected_fields = ['name', 'email', 'title', 'body']
     else:
-        selected_fields = ['user', 'title', 'body', 'status',"impacto"]
+        selected_fields = ['user', 'title', 'body',"impacto"]
     
     selected_fields+=['impacto',"urgencia","categories","tipo_problema"]
     if settings.ALERTS:
@@ -93,11 +93,11 @@ def ResponseForm(user, question, *args, **kwargs):
     selected_fields += ['body', 'question']
 
     if user.is_staff:
-        selected_fields += ['status']
+        selected_fields += []#['status']
 
     if settings.ALERTS:
         selected_fields += ['alert']
-
+    selected_fields += ["tipo","departamento"]
     class _ResponseForm(forms.ModelForm):
         def __init__(self, *args, **kwargs):
             super(_ResponseForm, self).__init__(*args, **kwargs)

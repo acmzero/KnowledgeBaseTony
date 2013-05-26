@@ -45,6 +45,7 @@
 {% endif %}
 
 {% attachment_form question %}
+
     </div>
   </div> <!-- .dk-dialog -->
 
@@ -70,6 +71,19 @@
         {{ response.body|striptags|markdown }}
 
         {% include "django_knowledge/mod_bar.html" with allowed_mods=allowed_mods.response type="response" node=response %}
+      {% get_attachments_for response as "my_entry_attachments" %}
+{% if my_entry_attachments %}
+<ul>
+{% for attachment in my_entry_attachments %}
+    <li>
+        <a href="{{ attachment.attachment_file.url }}">{{ attachment.filename }}</a>
+        {% attachment_delete_link attachment %}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+      
+      {% attachment_form response %}
       </div>
     </div> <!-- .dk-dialog -->
   {% empty %}
@@ -83,7 +97,7 @@
 
 
   {% if form %}
-    {% include "django_knowledge/form.html" with submit_value="Respond to this question" submit_and="and check back often for updates." %}
+    {% include "django_knowledge/form.html" with submit_value="Responder tema" submit_and="regresa por actualizaciones." %}
   {% else %}
     {% if question.locked %}
       <p class="center"><em>{% trans "Esta pregunta ha sido cerrada." %}</em></p>

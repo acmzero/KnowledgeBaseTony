@@ -134,7 +134,12 @@ def knowledge_thread(request,
     if question.impacto!="" and question.urgencia!="":
       question.nivel=str(int(question.impacto)+int(question.urgencia)-1 or 0)
     if question.contador>5:
-      question.categories=Category.objects.get(title="Problema")
+      cat=Category.objects.all()[0]
+      try:
+        cat=Category.objects.get(title="Problema")
+      except:
+        print "No hay categoria Problema"
+      question.categories=cat
     return render(request, template, {
         'request': request,
         'question': question,

@@ -33,9 +33,12 @@ TIEMPO_RESOLUCION = (
                    ("4", "48 Horas"),
                    ("5", "Planificada")
                    )
-STATUSES_EXTENDED = STATUSES + (
-    ('inherit', _('Heredar')),
-)
+TIPOS_SOLUCIONES=(
+                 ("T","Temporal"),
+                 ("F","Final")
+                 )
+
+STATUSES_EXTENDED = STATUSES 
 
 class TipoProblema(models.Model):
   tipo = models.CharField(max_length=60)
@@ -59,8 +62,8 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['title']
-        verbose_name = _('Categoria')
-        verbose_name_plural = _('Categorias')
+        verbose_name = _('Clasificacion')
+        verbose_name_plural = _('Clasificaciones')
 
 
 class KnowledgeBase(models.Model):
@@ -313,6 +316,10 @@ class Response(KnowledgeBase):
         max_length=32, choices=STATUSES_EXTENDED,
         default='inherit', db_index=True)
     accepted = models.BooleanField(default=False)
+    
+    tipo = models.CharField(verbose_name="Tipo",max_length=32,choices=TIPOS_SOLUCIONES)
+    
+    departamento=models.ForeignKey("knowledge.Departamento",verbose_name="Departamento")
 
     objects = ResponseManager()
 
@@ -340,7 +347,10 @@ class Adjunto(models.Model):
   localizacion=models.FileField(upload_to='./archivos', blank = False)
   #Comentar las opciones para los adjuntos (Documentadores)
   tipo_adjunto= models.CharField(max_length=50)
-  
+
+class Departamento(models.Model):
+  nombre=models.CharField(verbose_name="Departamento",max_length=40)
+  descripcion=models.CharField(verbose_name="Descripcion",max_length=255)
 
 # cannot attach on abstract = True... derp
 models.signals.post_save.connect(knowledge_post_save, sender=Question)
