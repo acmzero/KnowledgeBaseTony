@@ -4,6 +4,7 @@
 {% load markup %}
 {% load knowledge_tags %}
 {% load url from future %}
+{% load attachments_tags %}
 
 {% block title %}{{ question.title }}{% endblock title %}
 
@@ -31,6 +32,19 @@
       {{ question.body|striptags|markdown }}
 
       {% include "django_knowledge/mod_bar.html" with allowed_mods=allowed_mods.question type="question" node=question %}
+{% get_attachments_for question as "my_entry_attachments" %}
+{% if my_entry_attachments %}
+<ul>
+{% for attachment in my_entry_attachments %}
+    <li>
+        <a href="{{ attachment.attachment_file.url }}">{{ attachment.filename }}</a>
+        {% attachment_delete_link attachment %}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% attachment_form question %}
     </div>
   </div> <!-- .dk-dialog -->
 

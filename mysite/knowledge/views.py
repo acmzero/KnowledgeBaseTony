@@ -103,7 +103,8 @@ def knowledge_thread(request,
 
     if settings.LOGIN_REQUIRED and not request.user.is_authenticated():
         return HttpResponseRedirect(settings.LOGIN_URL+"?next=%s" % request.path)
-    
+    print request.user
+    print request.user.has_perm("attachments.add_attachments")
     try:
         question = Question.objects.can_view(request.user)\
                                    .get(id=question_id)

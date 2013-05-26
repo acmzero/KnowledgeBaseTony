@@ -28,7 +28,7 @@ def QuestionForm(user, *args, **kwargs):
     else:
         selected_fields = ['user', 'title', 'body', 'status',"impacto"]
     
-    selected_fields+=['impacto',"urgencia","categories","tipo_problema","adjuntos"]
+    selected_fields+=['impacto',"urgencia","categories","tipo_problema"]
     if settings.ALERTS:
         selected_fields += ['alert']
 

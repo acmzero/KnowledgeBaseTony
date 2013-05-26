@@ -200,7 +200,7 @@ class Question(KnowledgeBase):
 
     categories = models.ForeignKey('knowledge.Category', blank=False,verbose_name="Clasificacion")
     
-    adjuntos=models.ManyToManyField("knowledge.Adjunto",verbose_name="Adjuntos")
+    #adjuntos=models.ManyToManyField("knowledge.Adjunto",verbose_name="Adjuntos")
 
     objects = QuestionManager()
 
