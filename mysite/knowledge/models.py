@@ -351,7 +351,9 @@ class Adjunto(models.Model):
 class Departamento(models.Model):
   nombre=models.CharField(verbose_name="Departamento",max_length=40)
   descripcion=models.CharField(verbose_name="Descripcion",max_length=255)
-
+  def __unicode__(self):
+        return self.nombre
+      
 # cannot attach on abstract = True... derp
 models.signals.post_save.connect(knowledge_post_save, sender=Question)
 models.signals.post_save.connect(knowledge_post_save, sender=Response)
