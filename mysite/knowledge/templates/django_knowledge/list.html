@@ -5,13 +5,13 @@
 
 {% load knowledge_tags %}
 
-{% block title %}Showing {{ questions.paginator.count }} results{% if search %} for {{ search }}{% endif %}{% if category %} in {{ category.title }} category{% endif %}{% endblock title %}
+{% block title %}Mostrando {{ questions.paginator.count }} resultados{% if search %} para {{ search }}{% endif %}{% if category %} clasificaci&oacute;n {{ category.title }} {% endif %}{% endblock title %}
 
 {% block knowledge_widgets %}
 
 <div class="dk-widget">
   {# dunno how to do translation on this nasty block... #}
-  <h3>Showing {{ counter }} results{% if search %} for <em>{{ search }}</em>{% endif %}{% if category %} in <em>{{ category.title }}</em> category{% endif %}:</h3>
+  <h3>Mostrando {{ counter }} resultados{% if search %} para <em>{{ search }}</em>{% endif %}{% if category %} clasificaci&oacute;n <em>{{ category.title }}</em> {% endif %}:</h3>
   <hr />
 
   {% include 'django_knowledge/question_list.html' with questions=questions.object_list %}

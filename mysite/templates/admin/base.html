@@ -36,11 +36,11 @@
                 <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
                 {% endif %}
                 <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
-                 <a href='../kb'> <b>Regresar a Base de Conocimientos</b></a>
             {% endblock %}
         </div>
         {% endif %}
         {% block nav-global %}{% endblock %}
+                 <a href='/kb'> <b>Regresar a Base de Conocimientos</b></a>
     </div>
     <!-- END Header -->
     {% block breadcrumbs %}
